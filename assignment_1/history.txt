@@ -1,0 +1,85 @@
+    1  exit
+    2  su achaudhuri
+    3  exit
+    4  ls
+    5  exit
+    6  /cita/local/bin/passwd
+    7  ssh mussel
+    8  cd /fs/lustre/scratch/achaudhuri
+    9  mkdir CTA200_2025
+   10  cd /fs/lustre/scratch/achaudhuri/CTA200_2025
+   11  mkdir assignment_1
+   12  vi README.md
+   13  cd /home/murray
+   14  ls -l
+   15  find Hello_world.c
+   16  Hello_world.py
+   17  cd /home/murray/CTA200
+   18  find Hello_world.c
+   19  find Hello_world.py
+   20  cd /home/murray/Desktop
+   21  ls
+   22  cd /home/murray/CTA200H
+   23  ls
+   24  cd /home/murray/CTA200
+   25  ls
+   26  find /home/murray -name "Hello_world.c"
+   27  find /home/murray -name "Hello_world.py"
+   28  find "Hello_world.c"
+   29  find "Hello_world.py"
+   30  find /home/murray -name "Hello_world.c"
+   31  find /home/murray -name "Hello_world.py"
+   32  cd /home/murray/CTA200H/assignment1_2020
+   33  ls
+   34  cd /home/murray
+   35  ls
+   36  find /home/murray -name "Hello_world.c"
+   37  find /home/murray -name "Hello_world.py"
+   38  find /home/murray/Documents -name "Hello_world.c"
+   39  find /home/murray/Projects -name "Hello_world.c"
+   40  find /home/murray/Documents -name "Hello_world.py"
+   41  find /home/murray/Projects -name "Hello_world.py"
+   42  find -name "Hello_world.c"
+   43  find -name "Hello_world.c"iexit
+   44  ssh mussel
+   45  cd /home/murray
+   46  find -name "Hello_world.c" -print
+   47  cd /home/murray
+   48  find Hello_world.c
+   49  find /home/murray -name Hello_world.c -print
+   50  find /home/murray -name "Hello_world.c" -print
+   51  locate Hello_world.c
+   52  locate Hello_world.py
+   53  find . -name "Hello_world.c"
+   54  cd /home/Murray/Papers/tmp
+   55  cd /home/murray/Papers/tmp
+   56  ls
+   57  cp /home/murray/Papers/tmp/Hello_world.c /fs/lustre/scratch/achaudhuri/CTA200_2025/assignment_1/Hello_world_chaudhuri.c
+   58  sudo find . -name "Hello_world.py"
+   59  find . -name "Hello_world.py"
+   60  exit
+   61  cd /home/murray
+   62  find . -name "Hello_world.py"
+   63  cd /home/murray/tmp
+   64  exit
+   65  cd /home/murray/tmp
+   66  ls
+   67  cp /home/murray/tmp/Hello_world.py /fs/lustre/scratch/achaudhuri/CTA200_2025/assignment_1/Hello_world_chaudhuri.py
+   68  cd /fs/lustre/scratch/achaudhuri/CTA200_2025/assignment_1
+   69  ls
+   70  gcc Hello_world_chaudhuri.c Hello_world.x
+   71  gcc Hellow_world.x Hellow_world_chaudhuri.c
+   72  gcc Hello_world.c Hello_world_chaudhuri.c
+   73  gcc Hello_world_chaudhuri.c -o Hello_world.x
+   74  ./Hello_world
+   75  ./Hello_world.x
+   76  python3 Hello_world_chaudhuri.py
+   77  vi Hello_world_chaudhuri.c
+   78  vi Hello_world_chaudhuri.py
+   79  gcc Hello_world_chaudhuri.c -o Hello_world.x
+   80  ./Hello_world.x
+   81  python3 Hello_world_chaudhuri.py
+   82  ./Hello_world.x > output_c.txt
+   83  python3 Hello_world_chaudhuri.py > output_python.txt
+   84  history
+   85  history > history.txt
