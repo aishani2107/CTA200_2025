@@ -1,0 +1,116 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[thinc]{esdiff}
+
+\usepackage{graphicx} % Required for inserting images.
+\usepackage[margin=25mm]{geometry}
+\parskip 4.2pt  % Sets spacing between paragraphs.
+\renewcommand{\baselinestretch}{2}  % Uncomment for 1.5 spacing between lines.
+\parindent 10pt  % Sets leading space for paragraphs.
+%\usepackage[font=sf]{caption} % Changes font of captions.
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{siunitx}
+\usepackage{verbatim}
+\usepackage{hyperref} % Required for inserting clickable links.
+
+\title{Assignment 3}
+\author{Aishani Chaudhuri}
+
+\begin{document}
+\date{\vspace{-5ex}}  % Removes vertical space left by date
+\maketitle
+
+\section{Mandelbrot Set}
+Complex numbers have the form $c = x + iy$; when restrictions are set such that $-2 < x < 2$ and $-2 < y < 2$, and the iteration $z_{i+1} = z_i^2 + c$ is performed with $z_0 = 0$, some points in the complex plane diverge to infinity while others are bounded by $|z|^2 = \Re(z)^2 + \Im(z)^2 = 4$. The set of points that do not diverge to infinity form the Mandelbrot set.
+
+The iteration is performed by the following function:
+
+\begin{verbatim}
+def iterate_complex(x, y, max_iter):
+    # define complex number
+    c = x + y*1j
+    # iterate z
+    z = 0
+    for i in range(max_iter):
+        z = z**2 + c
+        if abs(z) > 2:
+            return i
+    return max_iter
+\end{verbatim}
+
+The function returns which iteration a given point diverges at; if the point remains bounded, it returns the value of \verb|max_iter|. Setting \verb|max_iter| to 100 and sampling 500 points within the bounds each for \verb|x| and \verb|y| resulted in the divergence maps of the Mandelbrot set as shown below.
+
+\begin{figure}[htbp!]
+\begin{center}
+\includegraphics[width=\columnwidth]{mandelbrot1.png}
+\end{center}
+\caption{Mandelbrot divergence map indicating which points in the complex plane are bounded and which diverge. In this case, the purple points are bounded while the orange points diverge upon iteration.}
+\label{fig:mandelbrot1}
+\end{figure}
+
+\begin{figure}[htbp!]
+\begin{center}
+\includegraphics[width=\columnwidth]{mandelbrot2.png}
+\end{center}
+\caption{Mandelbrot diverge map indicating at which iteration, if any, given points diverge. Points in peach have function output values of 100, indicating that they are bounded.}
+\label{fig:mandelbrot2}
+\end{figure}
+
+
+
+\section{Lorenz Equations}
+In 1963, meteorologist Edward Lorenz showed that the Earth's atmosphere, a deterministic physical system, could exhibit unpredictable behaviour; that is, for slightly different initial conditions, models representing the system predict very different results.
+
+Lorenz modelled the Earth's atmosphere as a thin atmosphere heated from below, performing a Fourier transform with three Fourier modes, with amplitudes $W \equiv (X, Y, Z)$. He arrived at the following equations, where $\sigma$ is the Prandtl number, $r$ is the Rayleigh number, and b is a dimensionless length scale:
+\[\diff{X}{t} = -\sigma(X - Y)\]
+\[\diff{Y}{t} = rX - Y - XZ\]
+\[\diff{Z}{t} = -bZ + XY\]
+
+To solve the system, the following function was defined to accept a state W and output the Lorenz equations.
+
+\begin{verbatim}
+def lorenz_eq(t, w, s, r, b):
+    # get values for X, Y, Z
+    X, Y, Z = w
+    # code equations
+    dXdt = -s * (X - Y)
+    dYdt = (r * X) - Y - (X * Z)
+    dZdt = -(b * Z) + (X * Y)
+    dW = [dXdt, dYdt, dZdt]
+    return dW
+\end{verbatim}
+
+The input and output were chosen to be array-like so that the built-in \verb|solve_ivp| function in the \verb|scipy.integrate| library can be used. Setting the initial conditions to $W_0 = [0., 1., 0.]$ and $[\sigma, r, b] = [10., 28, 8./3.]$ and integrating over time interval $t = [0, 60]$ with 6000 iterations, the following plots representing the solutions to the equations were obtained.
+
+\begin{figure}[htbp!]
+\begin{center}
+\includegraphics[width=\columnwidth]{Y vs t.png}
+\end{center}
+\caption{A plot of the solution for Y versus time, over the first 3000 iterations (or 30 seconds). Reproduction of Fig. 1 in Lorenz's original paper.}
+\label{fig:Ygraph}
+\end{figure}
+
+\begin{figure}[htbp!]
+\begin{center}
+\includegraphics[width=350px]{YZ and XY projections.png}
+\end{center}
+\caption{Projections on the YZ and XY planes, respectively, in phase space of the segment of solutions between iterations 1400 and 1900. Reproduction of Fig. 2 in Lorenz's original paper.}
+\label{fig:projections}
+\end{figure}
+
+To demonstrate unpredictability, the same calculations were performed for slightly different initial conditions: $W_0' = [0., 1.00000001, 0.]$. The Euclidean distance between the two solutions was calculated and graphed in a semilog plot (linear time, logarithmic difference) as shown below. The linear behaviour indicates an exponential growth in the difference between the two solutions over time, evidence of unpredictability in the system.
+
+\begin{figure}[htbp!]
+\begin{center}
+\includegraphics[width=350px]{difference.png}
+\end{center}
+\caption{Difference between solutions $W(t)$ and $W'(t)$, with slightly different initial conditions, over time.}
+\label{fig:difference}
+\end{figure}
+
+
+
+\end{document}
